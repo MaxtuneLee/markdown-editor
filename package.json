@@ -1,6 +1,6 @@
 {
   "name": "memora-markdown-editor",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A markdown editor for React with WYSIWYM live preview, built on CodeMirror.",
   "keywords": [
     "markdown",

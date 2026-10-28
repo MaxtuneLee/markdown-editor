@@ -149,7 +149,7 @@ class TableController {
     const next = tableModel(widget.table);
     const sameShape =
       // Gutters and editable cells are only built when the table is rendered.
-      widget.editable === this.widget.editable &&
+      widget.cellsEditable === this.widget.cellsEditable &&
       next.header.length === this.model.header.length &&
       next.rows.length === this.model.rows.length &&
       next.alignments.every((alignment, index) => alignment === this.model.alignments[index]);
@@ -841,13 +841,15 @@ export class TableWidget extends WidgetType {
   constructor(
     readonly source: string,
     readonly table: ParsedTable,
-    readonly editable: boolean,
+    // Not `editable`: that name is WidgetType's flag for leaving the widget's DOM editable, which
+    // would make the editor's content, not a cell, the editing host of a cell's caret.
+    readonly cellsEditable: boolean,
   ) {
     super();
   }
 
   eq(other: TableWidget): boolean {
-    return other.source === this.source && other.editable === this.editable;
+    return other.source === this.source && other.cellsEditable === this.cellsEditable;
   }
 
   get estimatedHeight(): number {

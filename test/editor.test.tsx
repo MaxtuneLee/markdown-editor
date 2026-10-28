@@ -138,6 +138,34 @@ describe("MarkdownEditor", () => {
     expect(editable(dom)).toBe(false);
   });
 
+  it("spaces blocks the same with or without blank lines between them", async () => {
+    const tight = await mount(
+      <MarkdownEditor defaultValue={"Intro\nsame paragraph\n- item\n# Next"} />,
+    );
+    expect([...tight.querySelectorAll(".cm-md-gap")].map((gap) => gap.className)).toEqual([
+      "cm-md-gap cm-md-gap-block",
+      "cm-md-gap cm-md-gap-heading",
+    ]);
+    expect(tight.querySelector(".cm-md-gap-line")).toBeNull();
+  });
+
+  it("shrinks the blank lines between blocks to the block gap", async () => {
+    const loose = await mount(<MarkdownEditor defaultValue={"Intro\n\n- item\n\n\n# Next"} />);
+    expect(loose.querySelector(".cm-md-gap")).toBeNull();
+    expect([...loose.querySelectorAll(".cm-md-gap-line")].map((line) => line.className)).toEqual([
+      "cm-line cm-md-gap-line cm-md-gap-block",
+      "cm-line cm-md-gap-line cm-md-gap-heading",
+      "cm-line cm-md-gap-line cm-md-gap-block",
+    ]);
+  });
+
+  it("makes each cell, not the editor, the editing host of its caret", async () => {
+    const dom = await mount(<MarkdownEditor defaultValue={DOC} />);
+    // Without this, a caret placed in a cell belongs to the editor content, which takes focus
+    // and reveals the whole table as source.
+    expect(dom.querySelector<HTMLElement>(".cm-md-table-block")?.contentEditable).toBe("false");
+  });
+
   it("follows a controlled value without reporting it as a change", async () => {
     const onChange = vi.fn();
     const ref = createRef<MarkdownEditorHandle>();

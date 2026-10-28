@@ -20,6 +20,7 @@ import {
 import type { SyntaxNode } from "@lezer/common";
 
 import { blockPreview } from "./blockPreview";
+import { blockSpacing } from "./blockSpacing";
 import { markdownClipboard } from "./clipboard";
 import { codeBlocks } from "./codeBlocks";
 import { editorConfig, type MarkdownEditorConfig } from "./config";
@@ -78,6 +79,7 @@ export function markdownEditorExtensions(options: MarkdownExtensionsOptions = {}
     livePreview(),
     markdownClipboard,
     blockPreview(),
+    blockSpacing(),
     codeBlocks(),
     wikiLinkExtensions(),
     findPanel(),

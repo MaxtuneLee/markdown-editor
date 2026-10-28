@@ -165,6 +165,8 @@ declared on `.mde`, so a value set only on an ancestor doesn't reach it.
   --mde-heading-font: var(--app-display-font);
   --mde-heading-weight: 600;
   --mde-h1-size: 2.2em; /* also --mde-h2-size, --mde-h3-size, --mde-h4-size */
+  --mde-block-gap: 0.75em; /* between blocks, with or without blank lines in the source */
+  --mde-heading-gap: 1.6em; /* above a heading */
 }
 ```
 

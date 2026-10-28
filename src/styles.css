@@ -14,6 +14,9 @@
     --mde-content-width: 760px;
     --mde-padding-block: 24px;
     --mde-padding-inline: 24px;
+    /* Space between blocks, and the larger space above a heading. */
+    --mde-block-gap: 0.75em;
+    --mde-heading-gap: 1.6em;
     /* Code blocks, tables and panels; smaller corners scale from it. */
     --mde-radius: 8px;
     --mde-heading-font: var(--mde-font);
@@ -341,7 +344,7 @@
     font-size: 1.05em;
   }
   .mde .cm-md-math-block {
-    padding: 6px var(--mde-padding-inline);
+    padding: 0 var(--mde-padding-inline);
     overflow-x: auto;
     overflow-y: hidden;
     text-align: center;
@@ -439,14 +442,16 @@
     position: relative;
     /* Padding, not margin: CodeMirror measures block widgets without their margins, and any
      margin here would push every click below this block onto the wrong line. */
-    padding: 4px var(--mde-padding-inline) 8px
-      calc(var(--mde-padding-inline) - var(--mde-table-gutter));
+    /* No vertical padding: the column handles above and the scrollbar space below stand in for
+     part of the block gap (see blockSpacing.ts). */
+    padding: 0 var(--mde-padding-inline) 0 calc(var(--mde-padding-inline) - var(--mde-table-gutter));
   }
   /* Focus sits on the block while cells are selected; the selection itself shows where it is. */
   .mde .cm-md-table-block:focus {
     outline: none;
   }
   .mde .cm-md-table-block:not(:has(.cm-md-gutter-cell)) {
+    padding-top: 8px;
     padding-left: var(--mde-padding-inline);
   }
   .mde .cm-md-table-wrap {
@@ -510,7 +515,7 @@
     min-width: var(--mde-table-gutter);
   }
   .mde .cm-md-col-gutter > .cm-md-gutter-cell {
-    height: 16px;
+    height: 8px;
   }
   .mde .cm-md-row-handle,
   .mde .cm-md-col-handle {
@@ -534,7 +539,7 @@
   }
   .mde .cm-md-col-handle {
     left: 50%;
-    top: 5px;
+    top: 1px;
     width: 22px;
     height: 6px;
     margin-left: -11px;
@@ -634,7 +639,7 @@
   /* Mermaid diagrams. The outer block pads instead of using margins, for the same reason as
    tables. */
   .mde .cm-md-diagram-block {
-    padding: 6px var(--mde-padding-inline);
+    padding: 0 var(--mde-padding-inline);
   }
   .mde .cm-md-diagram {
     position: relative;
@@ -783,16 +788,27 @@
  * the same elements, and a layered rule would always lose to them.
  */
 
+/* Block spacing: a spacer before a block, or the blank line between two blocks. */
+.mde .cm-md-gap {
+  height: var(--mde-block-gap);
+}
+.mde .cm-md-gap.cm-md-gap-heading {
+  height: var(--mde-heading-gap);
+}
+.mde .cm-md-gap.cm-md-gap-flush {
+  height: 4px;
+}
+.mde .cm-line.cm-md-gap-line {
+  line-height: var(--mde-block-gap);
+}
+.mde .cm-line.cm-md-gap-line.cm-md-gap-heading {
+  line-height: var(--mde-heading-gap);
+}
+.mde .cm-line.cm-md-gap-line.cm-md-gap-flush {
+  line-height: 4px;
+}
+
 /* Line padding. */
-.mde .cm-md-h1 {
-  padding-top: 0.6em;
-}
-.mde .cm-md-h2 {
-  padding-top: 0.5em;
-}
-.mde .cm-md-h3 {
-  padding-top: 0.4em;
-}
 .mde .cm-line.cm-md-quote {
   padding-left: calc(var(--mde-padding-inline) - 3px + 0.9em);
 }
