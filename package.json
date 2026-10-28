@@ -1,0 +1,83 @@
+{
+  "name": "memora-markdown-editor",
+  "version": "0.1.0",
+  "description": "A markdown editor for React with WYSIWYM live preview, built on CodeMirror.",
+  "keywords": [
+    "markdown",
+    "editor",
+    "react",
+    "codemirror",
+    "live-preview",
+    "wysiwym"
+  ],
+  "license": "MIT",
+  "author": "MaxtuneLee",
+  "homepage": "https://github.com/MaxtuneLee/memora-markdown-editor#readme",
+  "bugs": "https://github.com/MaxtuneLee/memora-markdown-editor/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxtuneLee/memora-markdown-editor.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./diff": {
+      "types": "./dist/diff.d.ts",
+      "import": "./dist/diff.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "prepublishOnly": "vp pack",
+    "dev": "vp pack --watch",
+    "playground": "vp dev playground --config vite.config.ts --port 9006",
+    "lint": "vp lint .",
+    "test": "vp test test",
+    "typecheck": "tsc --noEmit",
+    "format": "vp fmt ."
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.20.3",
+    "@codemirror/commands": "^6.11.0",
+    "@codemirror/lang-markdown": "^6.5.2",
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/merge": "^6.11.0",
+    "@codemirror/search": "^6.7.1",
+    "@codemirror/state": "^6.7.1",
+    "@codemirror/view": "^6.43.9",
+    "@lezer/common": "^1.5.2",
+    "@lezer/markdown": "^1.7.2",
+    "katex": "^0.16.38",
+    "pele": "^1.6.0",
+    "shiki": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "jsdom": "^25.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "~5.9.3",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "packageManager": "pnpm@10.28.0"
+}
